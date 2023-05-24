@@ -17,7 +17,7 @@ const MeuButton = (props) => {
   
     button:{
       alignItems:'center',
-      backgroundColor: '#ffe51f',
+      backgroundColor: '#008000',
       padding: 10,
       margin: 10,
     },

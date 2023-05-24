@@ -1,49 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
-import MeuButton from './src/components/MeuButton';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './src/screens/Home';
+import SignIn from './src/screens/SignIn';
+import SignUp from './src/screens/SignUp';
 
-// import { Container } from './styles';
+const Stack = createNativeStackNavigator();
 
-const projeto2 = () => {
-
-  const [contador, setcontador] = useState(0);
-
-//1. componentDidMount  
-//   useEffect(()=>{
-//     console.log('Montou o componente')
-//   },[]); 
-
-// //2. componentDidUpdate
-//   useEffect(()=>{
-//     console.log('Fez um update no componente')
-//   });
-
-// //3. contadorDidUpdate
-// useEffect(()=>{
-// console.log('Fez um update baseado em contador')
-// },[contador])
-
-  const contar = () => {
- setcontador(contador + 1);
-}
-
-const Reset = () => {
-  setcontador(0);
-}
-
+const App = () => {
   return (
-    <View>
-      <Text style={styles.texto}>Olá,mundo!</Text>
-      <Text style={styles.texto}>Contador = {contador}</Text>
-      <MeuButton texto="contar" onClick={contar}/>
-      <MeuButton texto="Reset" onClick={Reset}/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
-export default projeto2;
-const styles = StyleSheet.create({
-  texto:{
-    fontSize:30,
-  },
-});
+export default App;
