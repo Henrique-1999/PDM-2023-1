@@ -25,7 +25,7 @@ const Home = (props) => {
    setcontador(contador + 1);
   }
   
-  const Reset = () => {
+  const reset = () => {
     setcontador(0);
   }
   
@@ -34,7 +34,7 @@ const Home = (props) => {
         <Text style={styles.texto}>Olá,mundo!</Text>
         <Text style={styles.texto}>Contador = {contador}</Text>
         <MeuButton texto="contar" onClick={contar}/>
-        <MeuButton texto="Reset" onClick={Reset}/>
+        <MeuButton texto="reset" onClick={reset}/>
       </View>
     );
   };
