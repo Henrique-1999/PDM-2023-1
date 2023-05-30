@@ -2,6 +2,9 @@
 #
 .DS_Store
 
+#keys
+google-services.json
+
 # Xcode
 #
 build/

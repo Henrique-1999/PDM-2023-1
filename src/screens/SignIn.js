@@ -1,15 +1,36 @@
-import React from 'react';
-import {View, Text, StyleSheet, Image, TextInput} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 import MeuButton from '../components/MeuButton';
 import {Colors} from '../assets/Images/Colors';
+import auth from '@react-native-firebase/auth';
 
-const SignIn = props => {
+const SignIn = () => {
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
   const recuperarSenha = () => {
     alert('abrir recuperar senha');
   };
 
   const entrar = () => {
-    alert('realizar login');
+    console.log(`Email=${email} senha=${pass}`); //TODO retirar apos teste
+    auth()
+      .signInWithEmailAndPassword(email, pass)
+      .then(() => {
+        alert('Logou');
+        setEmail('');
+        setPass('');
+      })
+      .catch(e => {
+        console.log('SignIn= erro ao entrar' + e);
+      });
   };
 
   const cadastrar = () => {
@@ -17,21 +38,40 @@ const SignIn = props => {
   };
 
   return (
-    <View style={Styles.container}>
-      <View style={Styles.viewSuperior}>
-        <Image
-          style={Styles.image}
-          source={require('../assets/Images/SignIn.png')}
-          accessibilityLabel="logo"
-        />
-        <TextInput style={Styles.input}>Email : </TextInput>
-        <TextInput style={Styles.input}>Senha : </TextInput>
-        <Text style={Styles.esqueceuSenha} onPress={recuperarSenha}>
-          Esqueceu sua senha?
-        </Text>
-        <MeuButton texto="Entrar" onClick={entrar} />
-      </View>
-
+    <SafeAreaView style={Styles.container}>
+      <ScrollView style={Styles.scrollView}>
+        <View style={Styles.viewSuperior}>
+          <Image
+            style={Styles.image}
+            source={require('../assets/Images/SignIn.png')}
+            accessibilityLabel="logo"
+          />
+          <TextInput
+            style={Styles.input}
+            placeholder="Email"
+            keyboardType="email-address"
+            returnKeyType="next"
+            onChangeText={t => setEmail(t)}
+            onEndEditing={() => this.passTextInput.focus()}
+          />
+          <TextInput
+            // eslint-disable-next-line prettier/prettier
+            ref={(ref) => {
+              this.passTextInput = ref;
+            }}
+            style={Styles.input}
+            secureTextEntry={true}
+            placeholder="senha"
+            keyboardType="default"
+            returnKeyType="go"
+            onChangeText={t => setPass(t)}
+          />
+          <Text style={Styles.esqueceuSenha} onPress={recuperarSenha}>
+            Esqueceu sua senha?
+          </Text>
+          <MeuButton texto="Entrar" onClick={entrar} />
+        </View>
+      </ScrollView>
       <View style={Styles.viewInferior}>
         <View style={Styles.ouHr} />
         <View style={Styles.hr} />
@@ -41,7 +81,7 @@ const SignIn = props => {
           Cadastre-se
         </Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -56,6 +96,7 @@ const Styles = StyleSheet.create({
   },
   viewSuperior: {
     flex: 7,
+    height: 600,
     alignItems: 'center',
     backgroundColor: Colors.white,
   },
@@ -96,6 +137,7 @@ const Styles = StyleSheet.create({
   ouHr: {
     width: '100%',
     height: 10,
+    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'center',
     alignContent: 'center',
@@ -118,7 +160,12 @@ const Styles = StyleSheet.create({
     fontSize: 22,
     color: Colors.grey,
     marginLeft: 5,
-    marginTop: 5,
+    marginTop: 20,
     textDecorationLine: 'underline',
+  },
+
+  scrollView: {
+    backgroundColor: Colors.black,
+    height: 480,
   },
 });
