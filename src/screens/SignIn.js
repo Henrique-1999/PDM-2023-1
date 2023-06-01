@@ -7,34 +7,63 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView,
+  Alert,
 } from 'react-native';
 import MeuButton from '../components/MeuButton';
 import {Colors} from '../assets/Images/Colors';
 import auth from '@react-native-firebase/auth';
+import {CommonActions} from '@react-navigation/native';
 
-const SignIn = () => {
+const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
+
   const recuperarSenha = () => {
-    alert('abrir recuperar senha');
+    navigation.navigate('ForgotPassWord');
   };
 
   const entrar = () => {
-    console.log(`Email=${email} senha=${pass}`); //TODO retirar apos teste
-    auth()
-      .signInWithEmailAndPassword(email, pass)
-      .then(() => {
-        alert('Logou');
-        setEmail('');
-        setPass('');
-      })
-      .catch(e => {
-        console.log('SignIn= erro ao entrar' + e);
-      });
+    console.log(`Email=${email} senha=${pass}`);
+    if (email !== '' && pass !== '') {
+      auth()
+        .signInWithEmailAndPassword(email, pass)
+        .then(() => {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{name: 'Home'}],
+            }),
+          );
+        })
+        .catch(e => {
+          console.log('SignIn= erro ao entrar' + e);
+          switch (e.code) {
+            case 'auth/user-not-found':
+              Alert.alert('Erro:', 'Usuário não cadastrado.');
+              break;
+            case 'auth/wrong-password':
+              Alert.alert('Erro:', 'Senha incorreta.');
+              break;
+            case 'auth/invalid-email':
+              Alert.alert('Erro:', 'Email inválido.');
+              break;
+            case 'auth/user-disabled':
+              Alert.alert('Erro:', 'Usuário desabilitado.');
+              break;
+          }
+        });
+    } else {
+      Alert.alert('Erro:', 'Todos os campos devem ser preenchidos');
+    }
   };
 
   const cadastrar = () => {
-    alert('vai para cadastrar');
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{name: 'SignUp'}],
+      }),
+    );
   };
 
   return (
@@ -43,7 +72,7 @@ const SignIn = () => {
         <View style={Styles.viewSuperior}>
           <Image
             style={Styles.image}
-            source={require('../assets/Images/SignIn.png')}
+            source={require('../assets/Images/icon.png')}
             accessibilityLabel="logo"
           />
           <TextInput
@@ -61,7 +90,7 @@ const SignIn = () => {
             }}
             style={Styles.input}
             secureTextEntry={true}
-            placeholder="senha"
+            placeholder="Senha"
             keyboardType="default"
             returnKeyType="go"
             onChangeText={t => setPass(t)}
@@ -104,7 +133,7 @@ const Styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     marginTop: 20,
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.white,
   },
   image: {
     width: 100,
@@ -149,7 +178,7 @@ const Styles = StyleSheet.create({
   },
 
   textoOu: {
-    color: Colors.white,
+    color: Colors.black,
     marginLeft: 20,
     marginRight: 20,
     marginTop: 2,
@@ -158,14 +187,14 @@ const Styles = StyleSheet.create({
 
   naoTemconta: {
     fontSize: 22,
-    color: Colors.grey,
+    color: Colors.darkgrey,
     marginLeft: 5,
     marginTop: 20,
     textDecorationLine: 'underline',
   },
 
   scrollView: {
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.white,
     height: 480,
   },
 });
