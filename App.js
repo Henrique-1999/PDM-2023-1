@@ -15,10 +15,14 @@ const App = () => {
     <NavigationContainer>
       <StatusBar backgroundColor={Colors.primaryDark} />
       <Stack.Navigator initialRouteName="SignIn">
-        <Stack.Screen name="SignIn" component={SignIn} options={signInStyle} />
+        <Stack.Screen name="SignIn" component={SignIn} options={signIn} />
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="ForgotPassWord" component={ForgotPassWord} />
+        <Stack.Screen name="SignUp" component={SignUp} options={signUp} />
+        <Stack.Screen
+          name="ForgotPassWord"
+          component={ForgotPassWord}
+          options={forgotPassWord}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -26,7 +30,21 @@ const App = () => {
 
 export default App;
 
-const signInStyle = {
+const signIn = {
   headerStyle: {backgroundColor: Colors.primary},
+  headerTintColor: Colors.white,
+};
+
+const forgotPassWord = {
+  title: 'Recuperar senha',
+  headerStyle: {backgroundColor: Colors.primary},
+  headerTitleStyle: {color: Colors.white},
+  headerTintColor: Colors.white,
+};
+
+const signUp = {
+  title: 'Cadastrar usuário',
+  headerStyle: {backgroundColor: Colors.primary},
+  headerTitleStyle: {color: Colors.white},
   headerTintColor: Colors.white,
 };

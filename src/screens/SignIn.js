@@ -22,11 +22,17 @@ const SignIn = ({navigation}) => {
   };
 
   const entrar = () => {
-    console.log(`Email=${email} senha=${pass}`);
     if (email !== '' && pass !== '') {
       auth()
         .signInWithEmailAndPassword(email, pass)
         .then(() => {
+          if (auth().currentUser.emailVerified) {
+            Alert.alert(
+              'Atenção:',
+              'Seu email não foi verificado, verifique-o para prosseguir.',
+            );
+            return;
+          }
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
@@ -57,12 +63,7 @@ const SignIn = ({navigation}) => {
   };
 
   const cadastrar = () => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{name: 'SignUp'}],
-      }),
-    );
+    navigation.navigate('SignUp');
   };
 
   return (

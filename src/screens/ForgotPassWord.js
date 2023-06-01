@@ -34,7 +34,7 @@ const ForgotPassWord = ({navigation}) => {
           }
         });
     } else {
-      Alert.alert('Atenção:', 'Por favoe, preencha o campo email.');
+      Alert.alert('Atenção:', 'Por favor, preencha o campo email.');
     }
   };
 
