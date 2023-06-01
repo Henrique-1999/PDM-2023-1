@@ -62,7 +62,7 @@ const SignInStyle = {
   },
 
   textoOu: {
-    color: Colors.black,
+    color: Colors.primary,
     marginLeft: 20,
     marginRight: 20,
     marginTop: 2,
