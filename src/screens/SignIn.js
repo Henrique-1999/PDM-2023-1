@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   Image,
   TextInput,
   SafeAreaView,
@@ -10,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import MeuButton from '../components/MeuButton';
-import {Colors} from '../assets/Images/Colors';
+import SignInStyle from '../assets/styles/signInStyle';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
 
@@ -67,16 +66,16 @@ const SignIn = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={Styles.container}>
-      <ScrollView style={Styles.scrollView}>
-        <View style={Styles.viewSuperior}>
+    <SafeAreaView style={SignInStyle.container}>
+      <ScrollView style={SignInStyle.scrollView}>
+        <View style={SignInStyle.viewSuperior}>
           <Image
-            style={Styles.image}
-            source={require('../assets/Images/icon.png')}
+            style={SignInStyle.image}
+            source={require('../assets/images/icon.png')}
             accessibilityLabel="logo"
           />
           <TextInput
-            style={Styles.input}
+            style={SignInStyle.input}
             placeholder="Email"
             keyboardType="email-address"
             returnKeyType="next"
@@ -88,25 +87,25 @@ const SignIn = ({navigation}) => {
             ref={(ref) => {
               this.passTextInput = ref;
             }}
-            style={Styles.input}
+            style={SignInStyle.input}
             secureTextEntry={true}
             placeholder="Senha"
             keyboardType="default"
             returnKeyType="go"
             onChangeText={t => setPass(t)}
           />
-          <Text style={Styles.esqueceuSenha} onPress={recuperarSenha}>
+          <Text style={SignInStyle.esqueceuSenha} onPress={recuperarSenha}>
             Esqueceu sua senha?
           </Text>
           <MeuButton texto="Entrar" onClick={entrar} />
         </View>
       </ScrollView>
-      <View style={Styles.viewInferior}>
-        <View style={Styles.ouHr} />
-        <View style={Styles.hr} />
-        <Text style={Styles.textoOu}>Ou</Text>
+      <View style={SignInStyle.viewInferior}>
+        <View style={SignInStyle.ouHr} />
+        <View style={SignInStyle.hr} />
+        <Text style={SignInStyle.textoOu}>Ou</Text>
         <View />
-        <Text style={Styles.naoTemconta} onPress={cadastrar}>
+        <Text style={SignInStyle.naoTemconta} onPress={cadastrar}>
           Cadastre-se
         </Text>
       </View>
@@ -115,86 +114,3 @@ const SignIn = ({navigation}) => {
 };
 
 export default SignIn;
-
-const Styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 10,
-    backgroundColor: Colors.black,
-  },
-  viewSuperior: {
-    flex: 7,
-    height: 600,
-    alignItems: 'center',
-    backgroundColor: Colors.white,
-  },
-  viewInferior: {
-    flex: 1,
-    alignItems: 'center',
-    marginTop: 20,
-    backgroundColor: Colors.white,
-  },
-  image: {
-    width: 100,
-    height: 100,
-    marginTop: 80,
-    marginBottom: 50,
-  },
-
-  input: {
-    width: '95%',
-    backgroundColor: Colors.darkgrey,
-    borderBottomColor: Colors.grey,
-    borderBottomWidth: 2,
-    borderRadius: 10,
-    fontSize: 15,
-    padding: 5,
-    paddingBottom: 2,
-    marginBottom: 10,
-  },
-
-  esqueceuSenha: {
-    fontSize: 15,
-    color: Colors.primary,
-    alignSelf: 'flex-end',
-    marginTop: 20,
-    marginBottom: 50,
-    marginRight: 10,
-  },
-
-  ouHr: {
-    width: '100%',
-    height: 10,
-    marginTop: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignContent: 'center',
-  },
-
-  hr: {
-    width: '30%',
-    height: 1,
-  },
-
-  textoOu: {
-    color: Colors.black,
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 2,
-    fontSize: 20,
-  },
-
-  naoTemconta: {
-    fontSize: 22,
-    color: Colors.darkgrey,
-    marginLeft: 5,
-    marginTop: 20,
-    textDecorationLine: 'underline',
-  },
-
-  scrollView: {
-    backgroundColor: Colors.white,
-    height: 480,
-  },
-});

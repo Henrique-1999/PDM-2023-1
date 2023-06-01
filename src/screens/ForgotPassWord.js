@@ -1,10 +1,17 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TextInput} from 'react-native';
 
 const ForgotPassWord = () => {
   return (
     <View>
-      <Text>ForgotPassWord</Text>
+       <TextInput
+            style={Styles.input}
+            placeholder="Email"
+            keyboardType="email-address"
+            returnKeyType="next"
+            onChangeText={t => setEmail(t)}
+            onEndEditing={() => this.passTextInput.focus()}
+          />
     </View>
   );
 };
