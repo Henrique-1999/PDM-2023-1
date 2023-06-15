@@ -73,7 +73,7 @@ const SignIn = ({navigation}) => {
         <View style={SignInStyle.viewSuperior}>
           <Image
             style={SignInStyle.image}
-            source={require('../assets/Images/icon.png')}
+            source={require('../assets/images/icon.png')}
             accessibilityLabel="logo"
           />
           <TextInput
