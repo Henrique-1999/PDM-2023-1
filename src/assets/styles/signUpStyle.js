@@ -18,7 +18,7 @@ const SignUpStyle = {
     fontSize: 15,
     padding: 5,
     paddingBottom: 2,
-    marginTop: 50,
+    marginTop: 25,
     marginBottom: 50,
     textAlign: 'center',
   },
