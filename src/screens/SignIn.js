@@ -27,18 +27,19 @@ const SignIn = ({navigation}) => {
         .signInWithEmailAndPassword(email, pass)
         .then(() => {
           if (auth().currentUser.emailVerified) {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{name: 'Home'}],
+              }),
+            );
+          } else {
             Alert.alert(
               'Atenção:',
               'Seu email não foi verificado, verifique-o para prosseguir.',
             );
             return;
           }
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{name: 'Home'}],
-            }),
-          );
         })
         .catch(e => {
           console.log('SignIn= erro ao entrar' + e);
@@ -72,7 +73,7 @@ const SignIn = ({navigation}) => {
         <View style={SignInStyle.viewSuperior}>
           <Image
             style={SignInStyle.image}
-            source={require('../assets/images/icon.png')}
+            source={require('../assets/Images/icon.png')}
             accessibilityLabel="logo"
           />
           <TextInput
@@ -100,16 +101,16 @@ const SignIn = ({navigation}) => {
           </Text>
           <MeuButton texto="Entrar" onClick={entrar} />
         </View>
+        <View style={SignInStyle.viewInferior}>
+          <View style={SignInStyle.ouHr} />
+          <View style={SignInStyle.hr} />
+          <Text style={SignInStyle.textoOu}>Ou</Text>
+          <View />
+          <Text style={SignInStyle.naoTemconta} onPress={cadastrar}>
+            Cadastre-se
+          </Text>
+        </View>
       </ScrollView>
-      <View style={SignInStyle.viewInferior}>
-        <View style={SignInStyle.ouHr} />
-        <View style={SignInStyle.hr} />
-        <Text style={SignInStyle.textoOu}>Ou</Text>
-        <View />
-        <Text style={SignInStyle.naoTemconta} onPress={cadastrar}>
-          Cadastre-se
-        </Text>
-      </View>
     </SafeAreaView>
   );
 };

@@ -9,7 +9,7 @@ const SignInStyle = {
   },
   viewSuperior: {
     flex: 7,
-    height: 600,
+    height: 450,
     alignItems: 'center',
     backgroundColor: Colors.white,
   },
@@ -79,7 +79,6 @@ const SignInStyle = {
 
   scrollView: {
     backgroundColor: Colors.white,
-    height: 480,
   },
 };
 
