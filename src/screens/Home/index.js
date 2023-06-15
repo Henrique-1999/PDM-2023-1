@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import MeuButton from '../components/MeuButton';
+import MeuButton from '../../components/MeuButton';
 
 const Home = props => {
   const [contador, setcontador] = useState(0);

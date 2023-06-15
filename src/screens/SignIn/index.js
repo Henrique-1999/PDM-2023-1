@@ -8,8 +8,8 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import MeuButton from '../components/MeuButton';
-import SignInStyle from '../assets/styles/signInStyle';
+import MeuButton from '../../components/MeuButton';
+import SignInStyle from './style';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
 
@@ -73,7 +73,7 @@ const SignIn = ({navigation}) => {
         <View style={SignInStyle.viewSuperior}>
           <Image
             style={SignInStyle.image}
-            source={require('../assets/images/icon.png')}
+            source={require('../../assets/images/icon.png')}
             accessibilityLabel="logo"
           />
           <TextInput

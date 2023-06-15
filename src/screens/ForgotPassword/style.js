@@ -1,4 +1,4 @@
-import {Colors} from '../colors';
+import {Colors} from '../../assets/colors';
 
 const ForgotPassWordStyle = {
   container: {

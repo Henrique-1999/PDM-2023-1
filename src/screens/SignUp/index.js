@@ -8,8 +8,8 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import SignUpStyle from '../assets/styles/signUpStyle';
-import MeuButton from '../components/MeuButton';
+import SignUpStyle from './style';
+import MeuButton from '../../components/MeuButton';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
 

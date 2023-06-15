@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/screens/Home';
 import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
-import ForgotPassWord from './src/screens/ForgotPassWord';
+import ForgotPassWord from './src/screens/ForgotPassword';
 import {Colors} from './src/assets/colors';
 import {StatusBar} from 'react-native';
 
